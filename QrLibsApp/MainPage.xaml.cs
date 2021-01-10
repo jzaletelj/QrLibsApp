@@ -24,14 +24,11 @@ namespace QrLibsApp
             
         }
 
-        async void OnButtonClicked(object sender, EventArgs args)
+         void OnButtonClicked(object sender, EventArgs args)
         {
             labelRes.Text = result;
 
-            Button button = (Button)sender;
-            await DisplayAlert("Clicked!",
-                "The button labeled '" + button.Text + "' has been clicked",
-                "OK");
+            
         }
 
         protected override void OnAppearing()
