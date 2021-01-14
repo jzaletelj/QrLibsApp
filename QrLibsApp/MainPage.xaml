@@ -1,29 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.TreeView;assembly=Syncfusion.SfTreeView.XForms"
+             xmlns:treeviewengine="clr-namespace:Syncfusion.TreeView.Engine;assembly=Syncfusion.SfTreeView.XForms"
+             xmlns:local="clr-namespace:QrLibsApp;assembly=QrLibsApp"
              x:Class="QrLibsApp.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="12" CornerRadius="0">
-            <Label Text="C++ Integration" HorizontalTextAlignment="Center" TextColor="White" FontSize="25"/>
-        </Frame>
+    
+    <ContentPage.BindingContext>
+        <local:ItemsViewModel />
+    </ContentPage.BindingContext>
 
-        <Grid Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+   
+    
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="12" CornerRadius="0">
+                <Label Text="C++ Integration" HorizontalTextAlignment="Center" TextColor="White" FontSize="25"/>
+            </Frame>
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
 
-            <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Column="0" Clicked="OnButtonClicked" />
-            <Button Text="TEST NATIVE CALLBACK" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Column="1" />
-        </Grid>
+                <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" />
+                <Button Text="TEST NATIVE CALLBACK" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="1" />
 
-        <Label x:Name="labelRes" Text="" FontSize="16" Padding="30,0,30,0"/>
+                <syncfusion:SfTreeView x:Name="treeView"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="2"
+                             ItemHeight="40"
+                             Indentation="30"
+                             ExpanderWidth="40"
+                             SelectionMode="Multiple"
+                             ChildPropertyName="SubItems" 
+                             ItemsSource="{Binding ItemsInfo}"
+                             AutoExpandMode="RootNodesExpanded">
+                    <syncfusion:SfTreeView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5,0,0,0">
+                                <Label Text="{Binding Name}" 
+                                   FontSize="Medium"
+                                   VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfTreeView.ItemTemplate>
+                </syncfusion:SfTreeView>
+            </Grid>
+        </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
 
-        
-    </StackLayout>
-
+    <!-- <Label x:Name="labelRes" Text="" FontSize="16" Padding="30,0,30,0"/> --> 
 </ContentPage>
