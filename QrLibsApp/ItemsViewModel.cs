@@ -10,85 +10,66 @@ namespace QrLibsApp
     public class ItemsViewModel
     {
         QrLibsCl myQrLibs;
-        public string result;
+        string result;
+        string[] str = { "F22:1:3:0.00%M:0.00%M:9.00%M:9.00%M:9.00%M:9.00%M+3Y31", "F20:1:1:$3E199.9M:525 + 246Z / F23:1:0.001 % M:0::3.50 % M:+A1 / I3:1 + CSA" };
+        List<string> termsList = new List<string>();
 
         public ItemsViewModel()
         {
             myQrLibs = new QrLibsCl();
             QrDecode();
             GenerateItemInfo();
-            
         }
 
         public ObservableCollection<Items> ItemsInfo { get; set; }
 
         public void GenerateItemInfo()
         {
-
-            dynamic data = JObject.Parse(result);
-
+            string[] terms = termsList.ToArray();
             var mainNode = new Items() { Name = "QR Decoded Results" };
-            var child1 = new Items() { Name = "Measurement id " + data.DDid };
+            Items[] x = new Items[str.Length];
 
+            mainNode.SubItems = new ObservableCollection<Items>();
+
+            for (int j = 0; j < str.Length; j++)
+            {
+                dynamic data = JObject.Parse(terms[j]);
+
+                var child = new Items() { Name = "Measurement id " + data.DDid };
+                                
+                mainNode.SubItems.Add(child);
+
+                child.SubItems = new ObservableCollection<Items>();
+
+                for (int i = 0; i < data.content.Count; i++)
+                {
+                    child.SubItems.Add(new Items() { Name = data.content[i].type + " -> " + data.content[i].value });
+                }
+
+                x[j] = child;
+
+            }
 
             this.ItemsInfo = new ObservableCollection<Items>();
             ItemsInfo.Add(mainNode);
-
-            mainNode.SubItems = new ObservableCollection<Items>();
-            mainNode.SubItems.Add(child1);
-
-            //var child2 = new Items() { Name = "Measurement id 118" };
-
-            /*
-            for (int i = 0; i < data.content.Count; i++)
-            {
-                 items[i] = (data.content[i].type + " -> " + data.content[i].value);
-            }
-            */
-
-            child1.SubItems = new ObservableCollection<Items>();
-
-            for (int i = 0; i < data.content.Count; i++)
-            {
-                child1.SubItems.Add(new Items() { Name = data.content[i].type + " -> " + data.content[i].value });
-            }
-
-            /*
-           
-            //mainNode.SubItems.Add(child2);
-
-           
-            
-           child1.SubItems.Add(item1);
-           child1.SubItems.Add(item2);
-           child1.SubItems.Add(item3);
-           child2.SubItems = new ObservableCollection<Items>();
-           child2.SubItems.Add(item4);
-           child2.SubItems.Add(item5);
-           child2.SubItems.Add(item6);
-
-           */
-
-
-
-
-
 
         }
 
         private void QrDecode()
         {
-            // TEST QR DECODE
-            string str = "F22:1:3:0.00%M:0.00%M:9.00%M:9.00%M:9.00%M:9.00%M+3Y31";
+            int len;
+            for (int i = 0; i < str.Length; i++)
+            {
+                len = myQrLibs.QRDecode(str[i], 12);
+                result = myQrLibs.QRGetResult(len);
+ 
+            }
 
-            int len = myQrLibs.QRDecode(str, 12);
-            result = myQrLibs.QRGetResult(len);
-
-            //Console.WriteLine("Začetek testa: ");
-            //Console.WriteLine(result);
-
+            for (int runs = 0; runs < str.Length; runs++)
+            {
+                len = myQrLibs.QRDecode(str[runs], 12);
+                termsList.Add(myQrLibs.QRGetResult(len));
+            }
         }
-  
-            
     }
 }
