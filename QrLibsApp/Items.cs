@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace QrLibsApp
 {
@@ -10,6 +11,7 @@ namespace QrLibsApp
     {
         private bool isSelected;
         private string name;
+        private ImageSource imageIcon;
         private ObservableCollection<Items> subItems;
 
         public Items()
@@ -34,6 +36,16 @@ namespace QrLibsApp
             {
                 name = value;
                 RaisedOnPropertyChanged("Name");
+            }
+        }
+
+        public ImageSource ImageIcon
+        {
+            get { return imageIcon; }
+            set
+            {
+                imageIcon = value;
+                RaisedOnPropertyChanged("ImageIcon");
             }
         }
 

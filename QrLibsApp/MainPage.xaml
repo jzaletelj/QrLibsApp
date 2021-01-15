@@ -21,6 +21,7 @@
             </Frame>
             <Grid Margin="20">
                 <Grid.RowDefinitions>
+                    <!--<RowDefinition Height="60" /> -->
                     <RowDefinition Height="60" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -28,7 +29,9 @@
                     <ColumnDefinition  />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" />
+                  <!--  <Image Source="Icons/apps.png" Grid.Row="0" /> -->
+
+                    <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" />
                 <Button Text="TEST NATIVE CALLBACK" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="1" />
 
                 <syncfusion:SfTreeView x:Name="treeView"
@@ -43,16 +46,23 @@
                              AutoExpandMode="RootNodesExpanded">
                     <syncfusion:SfTreeView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="5,0,0,0">
-                                <Label Text="{Binding Name}" 
-                                   FontSize="Medium"
-                                   VerticalTextAlignment="Center"/>
+                            <Grid Padding="5,5,5,5">
+                                    <Image
+                                        Source="{Binding ImageIcon}"
+                                        />
+                                
+                                    <Label Text="{Binding Name}" 
+                                        FontSize="Medium"
+                                        VerticalTextAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </syncfusion:SfTreeView.ItemTemplate>
                 </syncfusion:SfTreeView>
             </Grid>
-        </StackLayout>
+
+                
+
+            </StackLayout>
             </ScrollView>
     </ContentPage.Content>
 

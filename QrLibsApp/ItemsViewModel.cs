@@ -3,7 +3,9 @@ using QrLibs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Text;
+using Xamarin.Forms;
 
 namespace QrLibsApp
 {
@@ -25,17 +27,21 @@ namespace QrLibsApp
 
         public void GenerateItemInfo()
         {
+            Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
             string[] terms = termsList.ToArray();
-            var mainNode = new Items() { Name = "QR Decoded Results" };
+            var mainNode = new Items() { Name = "QR Decoded Results", ImageIcon = ImageSource.FromResource("QrLibsApp.Icons.apps.png", assembly) };
             Items[] x = new Items[str.Length];
-
+  
             mainNode.SubItems = new ObservableCollection<Items>();
+
+            this.ItemsInfo = new ObservableCollection<Items>();
+            ItemsInfo.Add(mainNode);
 
             for (int j = 0; j < str.Length; j++)
             {
                 dynamic data = JObject.Parse(terms[j]);
 
-                var child = new Items() { Name = "Measurement id " + data.DDid };
+                var child = new Items() { Name = "Measurement id " + data.DDid, ImageIcon = ImageSource.FromResource("QrLibsApp.Icons.class.png", assembly) };
                                 
                 mainNode.SubItems.Add(child);
 
@@ -43,28 +49,16 @@ namespace QrLibsApp
 
                 for (int i = 0; i < data.content.Count; i++)
                 {
-                    child.SubItems.Add(new Items() { Name = data.content[i].type + " -> " + data.content[i].value });
+                    child.SubItems.Add(new Items() { Name = data.content[i].type + " -> " + data.content[i].value, ImageIcon = ImageSource.FromResource("QrLibsApp.Icons.check.png", assembly) });
+                    
                 }
-
-                x[j] = child;
-
+                x[j] = child; 
             }
-
-            this.ItemsInfo = new ObservableCollection<Items>();
-            ItemsInfo.Add(mainNode);
-
         }
 
         private void QrDecode()
         {
             int len;
-            for (int i = 0; i < str.Length; i++)
-            {
-                len = myQrLibs.QRDecode(str[i], 12);
-                result = myQrLibs.QRGetResult(len);
- 
-            }
-
             for (int runs = 0; runs < str.Length; runs++)
             {
                 len = myQrLibs.QRDecode(str[runs], 12);
