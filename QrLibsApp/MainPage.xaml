@@ -19,41 +19,46 @@
             <Frame BackgroundColor="#2196F3" Padding="12" CornerRadius="0">
                 <Label Text="C++ Integration" HorizontalTextAlignment="Center" TextColor="White" FontSize="25"/>
             </Frame>
-            <Grid Margin="20">
-                <Grid.RowDefinitions>
-                    <!--<RowDefinition Height="60" /> -->
-                    <RowDefinition Height="60" />
+            <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition  />
                 </Grid.ColumnDefinitions>
 
-                  <!--  <Image Source="Icons/apps.png" Grid.Row="0" /> -->
-
-                    <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" />
+                <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" />
                 <Button Text="TEST NATIVE CALLBACK" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="1" />
-
-                <syncfusion:SfTreeView x:Name="treeView"
+                
+                    <syncfusion:SfTreeView x:Name="treeView"
                              Grid.Row="1"
                              Grid.ColumnSpan="2"
                              ItemHeight="40"
-                             Indentation="30"
-                             ExpanderWidth="40"
+                             Indentation="20"
+                             ExpanderWidth="10"
                              SelectionMode="Multiple"
                              ChildPropertyName="SubItems" 
                              ItemsSource="{Binding ItemsInfo}"
                              AutoExpandMode="RootNodesExpanded">
                     <syncfusion:SfTreeView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="5,5,5,5">
+                            <Grid Padding="5,0,0,0">
                                     <Image
-                                        Source="{Binding ImageIcon}"
-                                        />
+                                        Grid.ColumnSpan="2"
+                                         Source="{Binding ImageIcon}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"
+                                               HeightRequest="25" 
+                                               WidthRequest="25"
+                                               Margin="30, 0, 20, 0"/>
                                 
                                     <Label Text="{Binding Name}" 
+                                        Grid.ColumnSpan="2"
                                         FontSize="Medium"
-                                        VerticalTextAlignment="Center"/>
+                                        VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           />
                             </Grid>
                         </DataTemplate>
                     </syncfusion:SfTreeView.ItemTemplate>

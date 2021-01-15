@@ -34,9 +34,6 @@ namespace QrLibsApp
   
             mainNode.SubItems = new ObservableCollection<Items>();
 
-            this.ItemsInfo = new ObservableCollection<Items>();
-            ItemsInfo.Add(mainNode);
-
             for (int j = 0; j < str.Length; j++)
             {
                 dynamic data = JObject.Parse(terms[j]);
@@ -50,11 +47,14 @@ namespace QrLibsApp
                 for (int i = 0; i < data.content.Count; i++)
                 {
                     child.SubItems.Add(new Items() { Name = data.content[i].type + " -> " + data.content[i].value, ImageIcon = ImageSource.FromResource("QrLibsApp.Icons.check.png", assembly) });
-                    
                 }
                 x[j] = child; 
             }
+            this.ItemsInfo = new ObservableCollection<Items>();
+            ItemsInfo.Add(mainNode);
         }
+
+        
 
         private void QrDecode()
         {
