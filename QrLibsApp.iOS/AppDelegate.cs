@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Syncfusion.XForms.iOS.TreeView;
 using UIKit;
 
 namespace QrLibsApp.iOS
@@ -23,6 +24,7 @@ namespace QrLibsApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            SfTreeViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

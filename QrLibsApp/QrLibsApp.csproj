@@ -11,6 +11,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="apps.png" />
+    <None Remove="Icons\apps.png" />
+    <None Remove="Icons\check.png" />
+    <None Remove="Icons\class.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\apps.png" />
+    <EmbeddedResource Include="Icons\check.png" />
+    <EmbeddedResource Include="Icons\class.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTreeView" Version="18.4.0.33" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="QrLibs" Version="1.0.3" />

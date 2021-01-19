@@ -7,38 +7,32 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Diagnostics;
 using QrLibs;
-
-
+using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
 
 namespace QrLibsApp
 {
-    
     public partial class MainPage : ContentPage
     {
         QrLibsCl myQrLibs;
-        string result;
+        public static string result;
+
 
         public MainPage()
         {
             InitializeComponent();
-            
         }
 
-        async void OnButtonClicked(object sender, EventArgs args)
+        void OnButtonClicked(object sender, EventArgs args)
         {
-            labelRes.Text = result;
-
-            Button button = (Button)sender;
-            await DisplayAlert("Clicked!",
-                "The button labeled '" + button.Text + "' has been clicked",
-                "OK");
+            // Ob pritisku na gumb se izvede koda v ItemsViewModel
+            BindingContext = new ItemsViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             myQrLibs = new QrLibsCl();
-            TestMathFuncs();
         }
 
         protected override void OnDisappearing()
@@ -47,6 +41,7 @@ namespace QrLibsApp
             myQrLibs.Dispose();
         }
 
+        // Test
         private void TestMathFuncs()
         {
             var numberA = 1;
@@ -65,10 +60,10 @@ namespace QrLibsApp
             var divideResult = myQrLibs.Divide(numberA, numberB);
 
             // Output results
-            Debug.WriteLine($"{numberA} + {numberB} = {addResult}");
-            Debug.WriteLine($"{numberA} - {numberB} = {subtractResult}");
-            Debug.WriteLine($"{numberA} * {numberB} = {multiplyResult}");
-            Debug.WriteLine($"{numberA} / {numberB} = {divideResult}");
+            //Debug.WriteLine($"{numberA} + {numberB} = {addResult}");
+            //Debug.WriteLine($"{numberA} - {numberB} = {subtractResult}");
+            //Debug.WriteLine($"{numberA} * {numberB} = {multiplyResult}");
+            //Debug.WriteLine($"{numberA} / {numberB} = {divideResult}");
 
 
             // TEST QR DECODE
@@ -76,14 +71,6 @@ namespace QrLibsApp
 
             int len = myQrLibs.QRDecode(str, 12);
             result = myQrLibs.QRGetResult(len);
-
-            Debug.WriteLine(result);
-            Debug.WriteLine("QR test end.");
-
-
-            
         }
-
-
     }
 }

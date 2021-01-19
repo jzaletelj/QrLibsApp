@@ -1,30 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.TreeView;assembly=Syncfusion.SfTreeView.XForms"
              x:Class="QrLibsApp.MainPage">
 
-    <StackLayout class="label1">
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-        <Label x:Name="labelRes" Text="" FontSize="16" Padding="30,0,30,0"/>
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="12" CornerRadius="0">
+                <Label Text="C++ Integration" HorizontalTextAlignment="Center" TextColor="White" FontSize="25"/>
+            </Frame>
+            <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
 
-        <Button Text="Click Me!"
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand"
-                Clicked="OnButtonClicked" />
-    </StackLayout>
+                <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" Clicked="OnButtonClicked" />
+                <Button Text="TEST NATIVE CALLBACK" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="1" />
+                
+                    <syncfusion:SfTreeView x:Name="treeView"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="2"
+                             ItemHeight="40"
+                             Indentation="20"
+                             ExpanderWidth="10"
+                             SelectionMode="Multiple"
+                             ChildPropertyName="SubItems" 
+                             ItemsSource="{Binding ItemsInfo}"
+                            >
+                    <syncfusion:SfTreeView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5,0,0,0">
+                                    <Image
+                                        Grid.ColumnSpan="2"
+                                         Source="{Binding ImageIcon}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"
+                                               HeightRequest="25" 
+                                               WidthRequest="25"
+                                               Margin="30, 0, 20, 0"/>
+                                
+                                    <Label Text="{Binding Name}" 
+                                        Grid.ColumnSpan="2"
+                                        FontSize="Medium"
+                                        VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           />
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfTreeView.ItemTemplate>
+                </syncfusion:SfTreeView>
+            </Grid>
+            </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
 
 </ContentPage>
