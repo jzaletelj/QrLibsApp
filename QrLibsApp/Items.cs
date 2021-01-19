@@ -19,7 +19,6 @@ namespace QrLibsApp
         }
 
         public ObservableCollection<Items> SubItems
-
         {
             get { return subItems; }
             set

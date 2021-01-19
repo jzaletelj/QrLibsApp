@@ -12,7 +12,6 @@ namespace QrLibsApp
     public class ItemsViewModel
     {
         QrLibsCl myQrLibs;
-        string result;
         string[] str = { "F22:1:3:0.00%M:0.00%M:9.00%M:9.00%M:9.00%M:9.00%M+3Y31", "F20:1:1:$3E199.9M:525 + 246Z / F23:1:0.001 % M:0::3.50 % M:+A1 / I3:1 + CSA" };
         List<string> termsList = new List<string>();
 
@@ -25,6 +24,7 @@ namespace QrLibsApp
 
         public ObservableCollection<Items> ItemsInfo { get; set; }
 
+        // Generate Three structure
         public void GenerateItemInfo()
         {
             Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
@@ -55,14 +55,15 @@ namespace QrLibsApp
         }
 
         
-
+        // Get data
         private void QrDecode()
         {
             int len;
+
             for (int runs = 0; runs < str.Length; runs++)
             {
-                len = myQrLibs.QRDecode(str[runs], 12);
-                termsList.Add(myQrLibs.QRGetResult(len));
+               len = myQrLibs.QRDecode(str[runs], 12);
+               termsList.Add(myQrLibs.QRGetResult(len));
             }
         }
     }

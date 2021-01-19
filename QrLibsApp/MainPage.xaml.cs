@@ -17,6 +17,7 @@ namespace QrLibsApp
         QrLibsCl myQrLibs;
         public static string result;
 
+
         public MainPage()
         {
             InitializeComponent();
@@ -24,16 +25,14 @@ namespace QrLibsApp
 
         void OnButtonClicked(object sender, EventArgs args)
         {
-            //labelRes.Text = result;
-          
-            dynamic data = JObject.Parse(result);
+            // Ob pritisku na gumb se izvede koda v ItemsViewModel
+            BindingContext = new ItemsViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             myQrLibs = new QrLibsCl();
-            TestMathFuncs();
         }
 
         protected override void OnDisappearing()
@@ -42,6 +41,7 @@ namespace QrLibsApp
             myQrLibs.Dispose();
         }
 
+        // Test
         private void TestMathFuncs()
         {
             var numberA = 1;
@@ -71,18 +71,6 @@ namespace QrLibsApp
 
             int len = myQrLibs.QRDecode(str, 12);
             result = myQrLibs.QRGetResult(len);
-            
-
-           // Console.WriteLine(data.DDid);
-
-
-            //Debug.WriteLine(result);
-            //Debug.WriteLine("QR test end.");
-
-
-            
         }
-
-
     }
 }

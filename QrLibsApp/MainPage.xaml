@@ -2,17 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.XForms.TreeView;assembly=Syncfusion.SfTreeView.XForms"
-             xmlns:treeviewengine="clr-namespace:Syncfusion.TreeView.Engine;assembly=Syncfusion.SfTreeView.XForms"
-             xmlns:local="clr-namespace:QrLibsApp;assembly=QrLibsApp"
              x:Class="QrLibsApp.MainPage">
 
-    
-    <ContentPage.BindingContext>
-        <local:ItemsViewModel />
-    </ContentPage.BindingContext>
-
-   
-    
     <ContentPage.Content>
         <ScrollView>
         <StackLayout>
@@ -28,7 +19,7 @@
                     <ColumnDefinition  />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" />
+                <Button Text="DECODE MEASUREMENT" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="0" Clicked="OnButtonClicked" />
                 <Button Text="TEST NATIVE CALLBACK" BackgroundColor="#2196F3" TextColor="#ffffff" Grid.Row="0" Grid.Column="1" />
                 
                     <syncfusion:SfTreeView x:Name="treeView"
@@ -40,7 +31,7 @@
                              SelectionMode="Multiple"
                              ChildPropertyName="SubItems" 
                              ItemsSource="{Binding ItemsInfo}"
-                             AutoExpandMode="RootNodesExpanded">
+                            >
                     <syncfusion:SfTreeView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="5,0,0,0">
@@ -64,12 +55,8 @@
                     </syncfusion:SfTreeView.ItemTemplate>
                 </syncfusion:SfTreeView>
             </Grid>
-
-                
-
             </StackLayout>
             </ScrollView>
     </ContentPage.Content>
 
-    <!-- <Label x:Name="labelRes" Text="" FontSize="16" Padding="30,0,30,0"/> --> 
 </ContentPage>
